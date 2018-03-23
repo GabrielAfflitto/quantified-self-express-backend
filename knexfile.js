@@ -25,7 +25,7 @@ module.exports = {
 
   production: {
     client: 'pg',
-    connection: 'quantified-self-api',
+    connection: 'postgresql-adjacent-85197',
     migrations: {
       directory: './db/migrations'
     },
