@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>Quantified Self Express</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
@@ -9,6 +9,40 @@
       <h1>Welcome to Tyler and Gabe's Quantified Self API!</h1>
       <div class="instructions">
         <p>The following endpoints are available. All endpoints will return the data as JSON.</p>
+        <div class="api">
+          <p>Food Endpoints:</p>
+            <ul>
+              <li>
+                <code>GET /api/v1/foods</code>
+                - returns all foods currently in the database
+              </li>
+              <li>
+                <code>GET /api/v1/foods/:id</code>
+                - returns the object with the specific <code>:id</code>
+                you've passed in or returns 404 if the food is not found
+              </li>
+              <li>
+                <code>POST /api/v1/foods</code>
+                - allows creating a new food with the parameters:
+                <br>
+                <code>{ food: { name: "Name of food here", calories: "Calories here"} }</code>
+                If food is successfully created, the food item will be returned. If the food is not successfully created, a 400 status code will be returned. Both name and calories are required fields
+              </li>
+              <li>
+                <code>PATCH /api/v1/foods/:id</code>
+                - allows one to update an existing food with the parameters:
+                <code>{ food: { name: "Name of food here", calories: "Calories here"} }</code>
+                If food is successfully updated (name and calories are required fields), the food item will be returned. If the food is not successfully updated, a 400 status code will be returned.
+              </li>
+              <li>
+                <code>DELETE /api/v1/foods/:id</code>
+                - will delete the food with the id passed in. If the food can't be found, a 404 will be returned.
+              </li>
+            </ul>
+        </div>
+        <div class="api">
+
+        </div>
       </div>
     </div>
   </body>
