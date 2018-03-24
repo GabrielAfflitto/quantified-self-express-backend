@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us" role="main">
   <head>
     <title>Quantified Self Express</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
@@ -26,12 +26,15 @@
                 - allows creating a new food with the parameters:
                 <br>
                 <code>{ food: { name: "Name of food here", calories: "Calories here"} }</code>
+                <br>
                 If food is successfully created, the food item will be returned. If the food is not successfully created, a 400 status code will be returned. Both name and calories are required fields
               </li>
               <li>
                 <code>PATCH /api/v1/foods/:id</code>
                 - allows one to update an existing food with the parameters:
+                <br>
                 <code>{ food: { name: "Name of food here", calories: "Calories here"} }</code>
+                <br>
                 If food is successfully updated (name and calories are required fields), the food item will be returned. If the food is not successfully updated, a 400 status code will be returned.
               </li>
               <li>
