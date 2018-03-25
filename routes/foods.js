@@ -31,4 +31,22 @@ router.get('/:id', function(req, res, next) {
   })
 });
 
+router.post('/', function(req, res, next) {
+  var name = req.body.name
+  var calories = req.body.calories
+
+  if(!name || !calories) {
+    return res.status(422).send({
+      error: "Name and calories are required to create a food"
+    })
+  }
+
+  database.raw(
+    'INSERT INTO foods(name, calories) VALUES (?, ?) RETURNING *',
+    [name, calories]
+  ).then(function(food) {
+    res.status(201).json(food.rows)
+  })
+});
+
 module.exports = router;
