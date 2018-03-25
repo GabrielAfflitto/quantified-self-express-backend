@@ -80,4 +80,19 @@ router.patch('/:id', function(req, res, next) {
   }
 });
 
+router.delete('/:id', function(req, res, next) {
+  let id = req.params.id
+
+  database.raw(
+    'DELETE FROM foods WHERE id = ?', [id]
+  ).then(function(foods) {
+    if(!foods.rows) {
+      return res.sendStatus(404)
+    } else {
+      res.json(foods.rows)
+    }
+  })
+
+})
+
 module.exports = router;
