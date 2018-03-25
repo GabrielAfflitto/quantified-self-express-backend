@@ -49,4 +49,35 @@ router.post('/', function(req, res, next) {
   })
 });
 
+router.patch('/:id', function(req, res, next) {
+
+  let id = req.params.id
+  if(req.body.name) {
+    var name = req.body.name
+  } else if(req.body.calories) {
+    var calories = req.body.calories
+  }
+
+  if(!name && !calories) {
+    return res.status(422).send({
+      error: "Name or calories are required to update a food"
+    })
+  }
+  if(name) {
+    database.raw(
+      'UPDATE foods SET name = ? WHERE id = ?',
+      [name, id]
+    ).then(function(food) {
+      res.status(201).json(food.rows)
+    })
+  } else if(calories) {
+    database.raw(
+      'UPDATE foods SET calories = ? WHERE id = ?',
+      [calories, id]
+    ).then(function(food) {
+      res.status(201).json(food.rows)
+    })
+  }
+});
+
 module.exports = router;
