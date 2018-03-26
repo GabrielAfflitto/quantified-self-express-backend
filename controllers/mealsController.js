@@ -1,6 +1,9 @@
 const allMeals = require('../models/mealsModel').allMeals;
 const showMeal = require('../models/mealsModel').showMeal;
-const createMeal = require('../models/mealsModel').createMeal;
+const createMealFood = require('../models/mealsModel').createMealFood;
+const deleteMealFood = require('../models/mealsModel').deleteMealFood;
+
+pry = require('pryjs')
 
 const index = function(req, res, next) {
   allMeals().then(function(mealFoods) {
@@ -59,8 +62,21 @@ const create = function(req, res, next) {
     })
   }
 
-  createMeal(meal_id, food_id).then(function(meal_food) {
-    res.status(201).json(meal_food.rows)
+  createMealFood(meal_id, food_id).then(function(mealFood) {
+    res.status(201).json(mealFood.rows)
+  })
+}
+
+const destroy = function(req, res, next) {
+  let meal_id = req.params.meal_id
+  let food_id = req.params.food_id
+
+  deleteMealFood(meal_id, meal_id).then(function(mealFood) {
+    if(!mealFood.rows) {
+      return res.sendStatus(404)
+    } else {
+      res.json(mealFood.rows)
+    }
   })
 }
 
@@ -89,4 +105,4 @@ const containsObject = function(object, output) {
   return false;
 }
 
-module.exports = { index, show, create}
+module.exports = { index, show, create, destroy}
