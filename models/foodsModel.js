@@ -38,5 +38,4 @@ const deleteFood = function(id) {
 }
 
 
-
 module.exports = { allFoods, showFood, createFood, updateFoodName, updateFoodCal, deleteFood };
