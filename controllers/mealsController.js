@@ -1,5 +1,6 @@
 const allMeals = require('../models/mealsModel').allMeals;
 const showMeal = require('../models/mealsModel').showMeal;
+const createMeal = require('../models/mealsModel').createMeal;
 
 const index = function(req, res, next) {
   allMeals().then(function(mealFoods) {
@@ -48,6 +49,21 @@ const show = function(req, res, next) {
   })
 }
 
+const create = function(req, res, next) {
+  let meal_id = req.params.meal_id
+  let food_id = req.params.food_id
+
+  if(!meal_id || !food_id) {
+    return res.status(422).send({
+      error: "Meal ID and food ID are required"
+    })
+  }
+
+  createMeal(meal_id, food_id).then(function(meal_food) {
+    res.status(201).json(meal_food.rows)
+  })
+}
+
 const createMealObject = function(mealFood) {
   let object = {}
   object['id'] = mealFood.meal_id
@@ -73,4 +89,4 @@ const containsObject = function(object, output) {
   return false;
 }
 
-module.exports = { index, show}
+module.exports = { index, show, create}
