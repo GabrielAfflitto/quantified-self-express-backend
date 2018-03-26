@@ -3,7 +3,6 @@ const showMeal = require('../models/mealsModel').showMeal;
 const createMealFood = require('../models/mealsModel').createMealFood;
 const deleteMealFood = require('../models/mealsModel').deleteMealFood;
 
-pry = require('pryjs')
 
 const index = function(req, res, next) {
   allMeals().then(function(mealFoods) {
@@ -71,7 +70,7 @@ const destroy = function(req, res, next) {
   let meal_id = req.params.meal_id
   let food_id = req.params.food_id
 
-  deleteMealFood(meal_id, meal_id).then(function(mealFood) {
+  deleteMealFood(meal_id, food_id).then(function(mealFood) {
     if(!mealFood.rows) {
       return res.sendStatus(404)
     } else {
