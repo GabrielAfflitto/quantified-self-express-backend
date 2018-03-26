@@ -9,6 +9,13 @@ const allMeals = function() {
     )
 }
 
+const showMeal = function(id) {
+  return database.raw(
+      'SELECT m.id AS meal_id, m.name AS meal_name, f.id AS food_id, f.name AS food_name, f.calories AS calories FROM meals m JOIN meal_foods mf ON m.id = mf.meal_id JOIN foods f ON f.id = mf.food_id WHERE m.id = ? ORDER BY m.id, f.id',
+      [id]
+    )
+}
 
 
-module.exports = { allMeals };
+
+module.exports = { allMeals, showMeal };
