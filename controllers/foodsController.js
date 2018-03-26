@@ -3,7 +3,7 @@ const showFood = require('../models/foodsModel').showFood;
 const createFood = require('../models/foodsModel').createFood;
 const updateFoodCal = require('../models/foodsModel').updateFoodCal;
 const updateFoodName = require('../models/foodsModel').updateFoodName;
-pry = require('pryjs')
+const deleteFood = require('../models/foodsModel').deleteFood;
 
 const index = function(req, res, next){
   allFoods().then(function(foods) {
@@ -65,4 +65,15 @@ const update = function(req, res, next) {
   }
 }
 
-module.exports = { index, show, create, update };
+const destroy = function(req, res, next) {
+  let id = req.params.id
+  deleteFood(id).then(function(foods) {
+    if(!foods.rows) {
+      return res.sendStatus(404)
+    } else {
+      res.json(foods.rows)
+    }
+  })
+}
+
+module.exports = { index, show, create, update, destroy };

@@ -1,6 +1,8 @@
 const environment = process.env.NODE_ENV || 'development'
 const configuration = require('../knexfile')[environment]
 const database = require('knex')(configuration)
+pry = require('pryjs')
+
 
 const allFoods = function() {
   return database.raw('SELECT * FROM foods')
@@ -31,6 +33,10 @@ const updateFoodName = function(name, id) {
     )
 }
 
+const deleteFood = function(id) {
+  return database.raw('DELETE FROM foods WHERE id = ?', [id])
+}
 
 
-module.exports = { allFoods, showFood, createFood, updateFoodName, updateFoodCal };
+
+module.exports = { allFoods, showFood, createFood, updateFoodName, updateFoodCal, deleteFood };
