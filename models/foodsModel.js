@@ -17,6 +17,20 @@ const createFood = function(name, calories) {
   )
 }
 
+const updateFoodCal = function(calories, id) {
+  return database.raw(
+    'UPDATE foods SET calories = ? WHERE id = ?',
+    [calories, id]
+  )
+}
+
+const updateFoodName = function(name, id) {
+  return database.raw(
+      'UPDATE foods SET name = ? WHERE id = ?',
+      [name, id]
+    )
+}
 
 
-module.exports = { allFoods, showFood, createFood };
+
+module.exports = { allFoods, showFood, createFood, updateFoodName, updateFoodCal };

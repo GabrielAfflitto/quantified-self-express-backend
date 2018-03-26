@@ -1,6 +1,8 @@
 const allFoods = require('../models/foodsModel').allFoods;
 const showFood = require('../models/foodsModel').showFood;
 const createFood = require('../models/foodsModel').createFood;
+const updateFoodCal = require('../models/foodsModel').updateFoodCal;
+const updateFoodName = require('../models/foodsModel').updateFoodName;
 pry = require('pryjs')
 
 const index = function(req, res, next){
@@ -38,4 +40,29 @@ const create = function(req, res, next) {
   })
 }
 
-module.exports = { index, show, create };
+const update = function(req, res, next) {
+
+  let id = req.params.id
+  if(req.body.name) {
+    var name = req.body.name
+  } else if(req.body.calories) {
+    var calories = req.body.calories
+  }
+
+  if(!name && !calories) {
+    return res.status(422).send({
+      error: "Name or calories are required to update a food"
+    })
+  }
+  if(name) {
+    updateFoodName(name, id).then(function(food) {
+      res.status(201).json(food.rows)
+    })
+  } else if(calories) {
+    updateFoodCal(calories, id).then(function(food) {
+      res.status(201).json(food.rows)
+    })
+  }
+}
+
+module.exports = { index, show, create, update };
