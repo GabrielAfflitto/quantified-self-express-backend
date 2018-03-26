@@ -1,5 +1,9 @@
 const allMeals = require('../models/mealsModel').allMeals;
 const showMeal = require('../models/mealsModel').showMeal;
+const createMealFood = require('../models/mealsModel').createMealFood;
+const deleteMealFood = require('../models/mealsModel').deleteMealFood;
+
+pry = require('pryjs')
 
 const index = function(req, res, next) {
   allMeals().then(function(mealFoods) {
@@ -48,6 +52,34 @@ const show = function(req, res, next) {
   })
 }
 
+const create = function(req, res, next) {
+  let meal_id = req.params.meal_id
+  let food_id = req.params.food_id
+
+  if(!meal_id || !food_id) {
+    return res.status(422).send({
+      error: "Meal ID and food ID are required"
+    })
+  }
+
+  createMealFood(meal_id, food_id).then(function(mealFood) {
+    res.status(201).json(mealFood.rows)
+  })
+}
+
+const destroy = function(req, res, next) {
+  let meal_id = req.params.meal_id
+  let food_id = req.params.food_id
+
+  deleteMealFood(meal_id, meal_id).then(function(mealFood) {
+    if(!mealFood.rows) {
+      return res.sendStatus(404)
+    } else {
+      res.json(mealFood.rows)
+    }
+  })
+}
+
 const createMealObject = function(mealFood) {
   let object = {}
   object['id'] = mealFood.meal_id
@@ -73,4 +105,4 @@ const containsObject = function(object, output) {
   return false;
 }
 
-module.exports = { index, show}
+module.exports = { index, show, create, destroy}
