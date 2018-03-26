@@ -16,13 +16,17 @@ const showMeal = function(id) {
     )
 }
 
-const createMeal = function(meal_id, food_id) {
+const createMealFood = function(meal_id, food_id) {
   return database.raw(
       'INSERT INTO meal_foods (meal_id, food_id) VALUES (?, ?)',
       [meal_id, food_id]
     )
 }
 
+const deleteMealFood = function(meal_id, food_id) {
+  return database.raw('DELETE FROM meal_foods WHERE id in (select id from meal_foods where meal_id = ? and food_id = ? LIMIT 1)', [meal_id, food_id])
+}
 
 
-module.exports = { allMeals, showMeal, createMeal };
+
+module.exports = { allMeals, showMeal, createMealFood, deleteMealFood };
