@@ -16,6 +16,13 @@ const showMeal = function(id) {
     )
 }
 
+const createMeal = function(meal_id, food_id) {
+  return database.raw(
+      'INSERT INTO meal_foods (meal_id, food_id) VALUES (?, ?)',
+      [meal_id, food_id]
+    )
+}
 
 
-module.exports = { allMeals, showMeal };
+
+module.exports = { allMeals, showMeal, createMeal };
