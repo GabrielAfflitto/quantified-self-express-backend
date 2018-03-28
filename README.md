@@ -73,12 +73,10 @@ GET /api/v1/foods/:id - returns the object with the specific :id you've passed i
 <br/>
 POST /api/v1/foods - allows creating a new food with the parameters:
 { food: { name: "Name of food here", calories: "Calories here"} } <br/>
-<br/>
 If food is successfully created, the food item will be returned. If the food is not successfully created, a 400 status code will be returned. Both name and calories are required fields.<br/>
 <br/>
 PATCH /api/v1/foods/:id - allows one to update an existing food with the parameters: 
 { food: { name: "Name of food here", calories: "Calories here"} } <br/>
-<br/>
 If food is successfully updated (name and calories are required fields), the food item will be returned. If the food is not successfully updated, a 400 status code will be returned.<br/>
 <br/>
 DELETE /api/v1/foods/:id - will delete the food with the id passed in. If the food can't be found, a 404 will be returned.<br/>
@@ -90,11 +88,9 @@ GET /api/v1/meals - returns all the meals in the database along with their assoc
 GET /api/v1/meals/:meal_id/foods - returns all the foods associated with the meal with an id specified by :meal_id or a 404 if the meal is not found<br/>
 <br/>
 POST /api/v1/meals/:meal_id/foods/:id - adds the food with :id to the meal with :meal_id <br/>
-<br/>
 This creates a new record in the MealFoods table to establish the relationship between this food and meal. If the meal/food cannot be found, a 404 will be returned.<br/>
 <br/>
 DELETE /api/v1/meals/:meal_id/foods/:id - removes the food with :id from the meal with :meal_id <br/>
-<br/>
 This deletes the existing record in the MealFoods table that creates the relationship between this food and meal. If the meal/food cannot be found, a 404 will be returned.<br/>
 
 ## Contributing
