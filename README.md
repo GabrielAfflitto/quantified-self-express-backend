@@ -93,6 +93,10 @@ This creates a new record in the MealFoods table to establish the relationship b
 DELETE /api/v1/meals/:meal_id/foods/:id - removes the food with :id from the meal with :meal_id <br/>
 This deletes the existing record in the MealFoods table that creates the relationship between this food and meal. If the meal/food cannot be found, a 404 will be returned.<br/>
 
+## Schema
+
+![Quantified Self Express Backend Schema](https://raw.githubusercontent.com/tylermarshal/quantified-self-express-backend/master/Screen%20Shot%202018-03-28%20at%202.14.08%20PM.png)
+
 ## Contributing
 
 If you would like to contribute to the project, please open a PR.
