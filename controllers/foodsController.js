@@ -18,12 +18,12 @@ const index = function(req, res, next){
 const show = function(req, res, next){
   let id = req.params.id
   showFood(id).then(function(foods) {
-      if(!foods.rows) {
-        return res.sendStatus(404)
-      } else {
-        res.json(foods.rows)
-      }
-    })
+    if(!foods.rows) {
+      return res.sendStatus(404)
+    } else {
+      res.json(foods.rows)
+    }
+  })
 }
 
 const create = function(req, res, next) {
